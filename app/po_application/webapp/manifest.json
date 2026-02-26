@@ -1,0 +1,193 @@
+{
+  "_version": "1.82.0",
+  "sap.app": {
+    "id": "com.app.poapplication",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:lrop",
+      "version": "1.20.3",
+      "toolsId": "54866c0c-a49f-42b7-b728-b59cc665e412"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/PoSrv/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "odataVersion": "4.01"
+        }
+      }
+    },
+    "crossNavigation": {
+      "inbounds": {
+        "po_app_semObj-display": {
+          "semanticObject": "po_app_semObj",
+          "action": "display",
+          "title": "{{po_app_semObj-display.flpTitle}}",
+          "subTitle": "{{po_app_semObj-display.flpSubtitle}}",
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
+          }
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "dependencies": {
+      "minUI5Version": "1.145.0",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.fe.templates": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "com.app.poapplication.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      },
+      "@i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "uri": "i18n/i18n.properties"
+      }
+    },
+    "resources": {
+      "css": []
+    },
+    "routing": {
+      "config": {},
+      "routes": [
+        {
+          "pattern": ":?query:",
+          "name": "PO_HeadersList",
+          "target": "PO_HeadersList"
+        },
+        {
+          "pattern": "PO_Headers({key}):?query:",
+          "name": "PO_HeadersObjectPage",
+          "target": "PO_HeadersObjectPage"
+        },
+        {
+          "pattern": "PO_Headers({key})/items({key2}):?query:",
+          "name": "PO_ItemsObjectPage",
+          "target": "PO_ItemsObjectPage"
+        }
+      ],
+      "targets": {
+        "PO_HeadersList": {
+          "type": "Component",
+          "id": "PO_HeadersList",
+          "name": "sap.fe.templates.ListReport",
+          "options": {
+            "settings": {
+              "contextPath": "/PO_Headers",
+              "variantManagement": "Page",
+              "navigation": {
+                "PO_Headers": {
+                  "detail": {
+                    "route": "PO_HeadersObjectPage"
+                  }
+                }
+              },
+              "controlConfiguration": {
+                "@com.sap.vocabularies.UI.v1.LineItem": {
+                  "tableSettings": {
+                    "type": "GridTable"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "PO_HeadersObjectPage": {
+          "type": "Component",
+          "id": "PO_HeadersObjectPage",
+          "name": "sap.fe.templates.ObjectPage",
+          "options": {
+            "settings": {
+              "editableHeaderContent": false,
+              "contextPath": "/PO_Headers",
+              "navigation": {
+                "items": {
+                  "detail": {
+                    "route": "PO_ItemsObjectPage"
+                  }
+                }
+              },
+              "controlConfiguration": {
+                "items/@com.sap.vocabularies.UI.v1.LineItem#Purchaseorderitems": {
+                  "tableSettings": {
+                    "enableMassEdit": {
+                      "operationGroupingMode": "Isolated"
+                    },
+                    "type": "GridTable"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "PO_ItemsObjectPage": {
+          "type": "Component",
+          "id": "PO_ItemsObjectPage",
+          "name": "sap.fe.templates.ObjectPage",
+          "options": {
+            "settings": {
+              "editableHeaderContent": false,
+              "contextPath": "/PO_Headers/items"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sap.fiori": {
+    "registrationIds": [],
+    "archeType": "transactional"
+  },
+  "sap.fe": {
+    "app": {
+      "enableLazyLoading": true
+    }
+  }
+}

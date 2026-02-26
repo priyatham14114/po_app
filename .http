@@ -1,0 +1,52 @@
+GET http://localhost:4004/PoSrv/PO_Headers HTTP/1.
+
+####
+POST http://localhost:4004/PoSrv/PO_Headers HTTP/1.1
+Content-Type: application/json
+
+{
+  "poNumber": "PO-2026-0002",
+  "companyCode": "1000",
+  "purchasingOrg": "P001",
+  "purchasingGroup": "001",
+  "documentType": "NB",
+  "currency": "INR",
+  "totalAmount": 155000.00,
+  "documentDate": "2026-02-26",
+  "postingDate": "2026-02-26",
+  "deliveryDate": "2026-03-15",
+  "status": "CREATED",
+
+  "items": [
+    {
+      "itemNumber": 10,
+      "material": "MAT-1001",
+      "description": "Laptop Dell 14 inch",
+      "plant": "PL01",
+      "storageLocation": "SL01",
+      "quantity": 5,
+      "unitOfMeasure": "EA",
+      "netPrice": 50000.00,
+      "priceUnit": 1,
+      "itemAmount": 250000.00,
+      "taxCode": "GST18",
+      "deliveryDate": "2026-03-10",
+      "itemStatus": "OPEN"
+    },
+    {
+      "itemNumber": 20,
+      "material": "MAT-2001",
+      "description": "Wireless Mouse",
+      "plant": "PL01",
+      "storageLocation": "SL01",
+      "quantity": 10,
+      "unitOfMeasure": "EA",
+      "netPrice": 500.00,
+      "priceUnit": 1,
+      "itemAmount": 5000.00,
+      "taxCode": "GST18",
+      "deliveryDate": "2026-03-12",
+      "itemStatus": "OPEN"
+    }
+  ]
+}
